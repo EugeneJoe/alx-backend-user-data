@@ -11,7 +11,7 @@ def hash_password(password: str) -> str:
     Args:
         password (str): password to be hashed
     """
-    b = password.encode('ASCII')
+    b = password.encode()
     hashed = bcrypt.hashpw(b, bcrypt.gensalt())
     return hashed
 
@@ -25,6 +25,6 @@ def is_valid(hashed_password, password):
     Return:
         bool
     """
-    if bcrypt.checkpw(password.encode('ASCII'), hashed_password):
+    if bcrypt.checkpw(password.encode(), hashed_password):
         return True
     return False
