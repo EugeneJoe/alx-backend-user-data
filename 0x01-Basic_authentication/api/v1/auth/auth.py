@@ -18,7 +18,8 @@ class Auth:
         Determines whether a given path requires authentication or not
         Args:
             - path(str): Url path to be checked
-            - excluded_paths(List of str): List of paths that do not require authentication
+            - excluded_paths(List of str): List of paths that do not require
+              authentication
         Return:
             - True if path is not in excluded_paths, else False
         """
@@ -36,10 +37,9 @@ class Auth:
                     return False
         return True
 
-
     def authorization_header(self, request=None) -> str:
         """
-        Returns None
+        Returns the authorization header from a request object
         """
         if request is None:
             return None
@@ -48,9 +48,8 @@ class Auth:
             return None
         return header
 
-
     def current_user(self, request=None) -> TypeVar('User'):
         """
-        Returns None
+        Returns a User instance from information from a request object
         """
         return None
