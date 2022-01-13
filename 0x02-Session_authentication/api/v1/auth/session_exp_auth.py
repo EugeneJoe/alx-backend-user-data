@@ -22,7 +22,7 @@ class SessionExpAuth(SessionAuth):
         """
         try:
             duration = int(os.getenv('SESSION_DURATION'))
-        except:
+        except Exception:
             duration = 0
         self.session_duration = duration
 
@@ -59,7 +59,7 @@ class SessionExpAuth(SessionAuth):
             return None
         if self.session_duration <= 0:
             return user_details.get("user_id")
-        created_at =  user_details.get("created_at")
+        created_at = user_details.get("created_at")
         allowed_window = created_at + timedelta(seconds=self.session_duration)
         if allowed_window < datetime.now():
             return None
