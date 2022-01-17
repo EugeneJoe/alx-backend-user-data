@@ -2,11 +2,11 @@
 """
 Define class SessionDButh
 """
-from .session_exp_auth import SessionAuth
+from .session_exp_auth import SessionExpAuth
 from models.user_session import UserSession
 
 
-class SessionDBAuth(SessionAuth):
+class SessionDBAuth(SessionExpAuth):
     """
     Definition of SessionDBAuth class that persists session data
     in a database
@@ -37,12 +37,8 @@ class SessionDBAuth(SessionAuth):
         Return:
             user id or None if session_id is None or not a string
         """
-        if session_id is None or not isinstance(session_id, str):
-            return None
-        res = UserSession.search({"session_id": session_id})
-        if res:
-            return res[0].user_id
-        return None
+        user_id = super().user_id_for_session_id(session_id)
+        return user_id
 
     def destroy_session(self, request=None):
         """
