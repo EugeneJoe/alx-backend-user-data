@@ -39,7 +39,7 @@ class DB:
             self.__session = DBSession()
         return self.__session
 
-    def add_user(self, email: str, hashed_password: str) -> U:
+    def add_user(self, email: str, hashed_password: str) -> User:
         """
         Create a User object and save it to the database
         Args:
@@ -53,7 +53,7 @@ class DB:
         self._session.commit()
         return user
 
-    def find_user_by(self, *args, **kwargs) -> U:
+    def find_user_by(self, *args, **kwargs) -> User:
         """
         Return a user who has an attribute matching the attributes passed
         as arguments
