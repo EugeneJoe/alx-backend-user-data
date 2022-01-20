@@ -6,7 +6,9 @@ from flask import (
     Flask,
     request,
     jsonify,
-    abort
+    abort,
+    redirect,
+    url_for
 )
 
 from auth import Auth
@@ -15,8 +17,8 @@ app = Flask(__name__)
 AUTH = Auth()
 
 
-@app.route("/", methods=["GET"])
-def index():
+@app.route("/", methods=["GET"], strict_slashes=False)
+def index() -> str:
     """
     Return json respomse
     {"message": "Bienvenue"}
@@ -25,7 +27,7 @@ def index():
 
 
 @app.route("/users", methods=["POST"], strict_slashes=False)
-def users():
+def users() -> str:
     """
     Register new users
     """
@@ -40,7 +42,7 @@ def users():
 
 
 @app.route("/sessions", methods=["POST"], strict_slashes=False)
-def login():
+def login() -> str:
     """
     Log in a user if the credentials provided are correct, and create a new
     session for them.
@@ -72,7 +74,7 @@ def logout():
 
 
 @app.route("/profile", methods=["GET"], strict_slashes=False)
-def profile():
+def profile() -> str:
     """
     Return a user's email based on session_id in the received cookies
     """
@@ -84,7 +86,7 @@ def profile():
 
 
 @app.route("/reset_password", methods=["POST"], strict_slashes=False)
-def get_reset_password_token():
+def get_reset_password_token() -> str:
     """
     Generate a token for resetting a user's password
     """
@@ -98,7 +100,7 @@ def get_reset_password_token():
 
 
 @app.route("/reset_password", methods=["PUT"], strict_slashes=False)
-def update_password():
+def update_password() -> str:
     """
     Update a user's password
     """
