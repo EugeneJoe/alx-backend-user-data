@@ -47,7 +47,7 @@ class DB:
         self._session.commit()
         return user
 
-    def find_user_by(self, *args, **kwargs) -> User:
+    def find_user_by(self, **kwargs) -> User:
         """
         Return a user who has an attribute matching the attributes passed
         as arguments
