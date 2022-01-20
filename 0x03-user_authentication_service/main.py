@@ -15,7 +15,7 @@ def register_user(email: str, password: str) -> None:
         None
     """
     resp = requests.post('http://127.0.0.1:5000/users',
-                      data={'email': email, 'password': password})
+                         data={'email': email, 'password': password})
     if resp.status_code == 200:
         assert (resp.json() == {"email": email, "message": "user created"})
     else:
@@ -35,6 +35,7 @@ def log_in_wrong_password(email: str, password: str) -> None:
     r = requests.post('http://127.0.0.1:5000/sessions',
                       data={'email': email, 'password': password})
     assert (r.status_code == 401)
+
 
 def profile_unlogged() -> None:
     """
@@ -56,7 +57,7 @@ def log_in(email: str, password: str) -> str:
         The session_id of the user.
     """
     resp = requests.post('http://127.0.0.1:5000/sessions',
-                      data={'email': email, 'password': password})
+                         data={'email': email, 'password': password})
     assert (resp.status_code == 200)
     assert(resp.json() == {"email": email, "message": "logged in"})
     return resp.cookies['session_id']
