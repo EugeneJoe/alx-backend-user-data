@@ -64,7 +64,7 @@ def logout():
     """
     Log out a logged in user and destroy their session
     """
-    session_id = request.cookie.get("session_id", None)
+    session_id = request.cookies.get("session_id", None)
     if session_id:
         user = AUTH.get_user_from_session_id(session_id)
     else:
