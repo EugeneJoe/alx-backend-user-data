@@ -82,5 +82,8 @@ class DB:
         except NoResultFound:
             raise ValueError()
         for k, v in kwargs.items():
-            setattr(usr, k, v)
+            if hasattr(usr, k):
+                setattr(usr, k, v)
+            else:
+                raise ValueError
         self._session.commit()
