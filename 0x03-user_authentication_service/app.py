@@ -65,13 +65,10 @@ def logout():
     Log out a logged in user and destroy their session
     """
     session_id = request.cookies.get("session_id", None)
-    if session_id:
-        user = AUTH.get_user_from_session_id(session_id)
-    else:
-        abort(403)
+    user = AUTH.get_user_from_session_id(session_id)
     if user:
         Auth.destroy_session(user.id)
-        return redirect(url_for("index"))
+        return redirect("/")
     abort(403)
 
 
