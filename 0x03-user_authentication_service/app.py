@@ -66,10 +66,10 @@ def logout():
     """
     session_id = request.cookies.get("session_id", None)
     user = AUTH.get_user_from_session_id(session_id)
-    if user:
-        Auth.destroy_session(user.id)
-        return redirect("/")
-    abort(403)
+    if user is None or session_id is None:
+        abort(403)
+    Auth.destroy_session(user.id)
+    return redirect("/")
 
 
 @app.route("/profile", methods=["GET"], strict_slashes=False)
